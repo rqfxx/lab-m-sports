@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>奇异果体育 · 信息引导页</title>
+    <style>
+        /* reset & base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fbe9d2 0%, #fdd7b5 40%, #f8cdaa 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2rem 1.2rem 3.5rem;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片 */
+        .hero-card {
+            background: white;
+            border-radius: 48px 48px 32px 32px;
+            padding: 2.8rem 2rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 28px rgba(150, 90, 50, 0.16);
+            text-align: center;
+            transition: box-shadow 0.2s ease;
+        }
+
+        .hero-card h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #4f2d1a;
+            line-height: 1.2;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-card h1 span {
+            background: linear-gradient(135deg, #d97c4a, #b75a2e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-card .sub {
+            font-size: 1.1rem;
+            color: #6f4a30;
+            background: #fcf4eb;
+            display: inline-block;
+            padding: 0.3rem 1.2rem;
+            border-radius: 60px;
+            margin: 0.4rem 0 1.2rem;
+            font-weight: 450;
+        }
+
+        .hero-card p {
+            max-width: 620px;
+            margin: 1rem auto 0.2rem;
+            color: #3f2c1e;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .hero-card .meta-note {
+            margin-top: 1.4rem;
+            font-size: 0.95rem;
+            color: #7f5b42;
+            border-top: 1px solid #f2e1d2;
+            padding-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2.5rem;
+        }
+
+        .meta-note div {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .meta-note svg {
+            width: 20px;
+            height: 20px;
+            fill: #c4794b;
+        }
+
+        /* 网格卡片区 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.2rem;
+        }
+
+        .card-item {
+            background: white;
+            border-radius: 32px;
+            padding: 1.8rem 1.5rem 2rem;
+            box-shadow: 0 8px 18px rgba(140, 80, 40, 0.10);
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(140, 80, 40, 0.16);
+        }
+
+        .card-item .emoji-badge {
+            font-size: 2.2rem;
+            line-height: 1;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-item h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #3d281a;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-item p {
+            color: #4d3728;
+            line-height: 1.6;
+            font-size: 0.98rem;
+            margin-bottom: 0.2rem;
+            flex: 1;
+        }
+
+        .card-item .tag {
+            background: #f4e7dd;
+            color: #6b3f26;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        /* 链接段落卡片 (自然嵌入) */
+        .link-paragraph-card {
+            background: white;
+            border-radius: 36px;
+            padding: 2rem 2.2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 22px rgba(140, 80, 40, 0.08);
+            line-height: 1.7;
+            color: #312319;
+            font-size: 1.05rem;
+        }
+
+        .link-paragraph-card a {
+            color: #b45d31;
+            background: #fcf3ea;
+            text-decoration: none;
+            font-weight: 550;
+            padding: 0.15rem 0.6rem;
+            border-radius: 30px;
+            transition: background 0.2s, color 0.2s;
+            white-space: nowrap;
+        }
+
+        .link-paragraph-card a:hover {
+            background: #e6cbb8;
+            color: #5e2c15;
+        }
+
+        .link-paragraph-card strong {
+            color: #4f2c18;
+            font-weight: 600;
+        }
+
+        /* FAQ 摘要卡片 */
+        .faq-mini {
+            background: white;
+            border-radius: 36px;
+            padding: 1.8rem 2rem 2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 8px 18px rgba(130, 70, 30, 0.06);
+        }
+
+        .faq-mini h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #392618;
+            margin-bottom: 1.2rem;
+            border-left: 6px solid #d4814e;
+            padding-left: 1rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #f0dfd2;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .faq-item .q {
+            font-weight: 600;
+            color: #3a2517;
+            display: block;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .faq-item .a {
+            color: #4e3829;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-left: 0.2rem;
+        }
+
+        .faq-item .a a {
+            color: #b45d31;
+            text-decoration: underline wavy #d9a984 1.5px;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        /* 底部 */
+        .footer-note {
+            text-align: center;
+            color: #644d3c;
+            font-size: 0.9rem;
+            padding: 1.2rem 0.5rem;
+            border-top: 1px solid rgba(255, 215, 180, 0.5);
+            margin-top: 0.8rem;
+            opacity: 0.85;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            body { padding: 1.2rem 0.8rem 2.5rem; }
+            .hero-card { padding: 2rem 1.2rem; border-radius: 36px; }
+            .hero-card h1 { font-size: 2rem; }
+            .hero-card .sub { font-size: 1rem; }
+            .grid-cards { gap: 1.2rem; }
+            .card-item { padding: 1.5rem 1.2rem; border-radius: 28px; }
+            .link-paragraph-card { padding: 1.5rem 1.2rem; border-radius: 28px; font-size: 1rem; }
+            .faq-mini { padding: 1.5rem 1.2rem; border-radius: 28px; }
+            .meta-note { flex-direction: column; gap: 0.5rem; }
+        }
+
+        @media (max-width: 420px) {
+            .hero-card h1 { font-size: 1.7rem; }
+            .grid-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- hero 卡片 -->
+    <div class="hero-card">
+        <h1><span>奇异果体育</span> · 稳定入口</h1>
+        <div class="sub">运动生活 · 信息卡片</div>
+        <p>从这里了解一个更清晰、更平实的运动内容页面。没有繁复的跳转，只有直接指向主要信息的自然引导。</p>
+        <div class="meta-note">
+            <div>
+                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <span>内容卡片聚合</span>
+            </div>
+            <div>
+                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+                <span>适合多种人群</span>
+            </div>
+            <div>
+                <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>页面说明先行</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 用途卡片 / 场景 -->
+    <div class="grid-cards">
+        <div class="card-item">
+            <div class="emoji-badge">🏸</div>
+            <h3>运动资讯</h3>
+            <p>获取各类运动项目的动态、规则介绍与背景知识，页面内容简明，便于快速浏览。</p>
+            <span class="tag">信息参考</span>
+        </div>
+        <div class="card-item">
+            <div class="emoji-badge">🧘</div>
+            <h3>日常轻阅读</h3>
+            <p>页面采用卡片式排列，适合在碎片时间里阅读运动相关话题，没有信息过载的负担。</p>
+            <span class="tag">场景友好</span>
+        </div>
+        <div class="card-item">
+            <div class="emoji-badge">🌐</div>
+            <h3>稳定入口</h3>
+            <p>通过一致的链接可直接到达主要页面，减少中间环节。适合作为书签或常用入口保留。</p>
+            <span class="tag">直达</span>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-paragraph-card">
+        <p><strong>页面说明：</strong> 本页为信息聚合式介绍页，专注于提供关于运动内容与相关服务的概况。如果你希望直接浏览主要站点，<a href="https://m-sports-kiwi.com">奇异果体育</a> 的页面包含更多运动分类与内容板块。所有链接均采用自然文字嵌入，没有额外修饰，方便你根据上下文判断是否进一步浏览。</p>
+        <p style="margin-top: 1rem;">许多朋友习惯把常用页面放在收藏夹中，而 <a href="https://m-sports-kiwi.com">奇异果体育</a> 的链接结构相对稳定，适合作为长期参考。本页仅作引导介绍，不替代原站功能，具体信息请以实际页面为准。</p>
+    </div>
+
+    <!-- 适合人群 + FAQ 摘要 -->
+    <div class="faq-mini">
+        <h2>适合人群 & 常见疑问</h2>
+        <div class="faq-item">
+            <span class="q">🏃 运动爱好者</span>
+            <div class="a">内容覆盖多项运动的基础信息与动态，适合对运动感兴趣、希望了解不同项目的朋友。</div>
+        </div>
+        <div class="faq-item">
+            <span class="q">🧑‍💻 轻度浏览者</span>
+            <div class="a">卡片式布局降低了阅读压力，不需要注册或复杂操作，点开即读。</div>
+        </div>
+        <div class="faq-item">
+            <span class="q">📌 这个页面和主站的关系？</span>
+            <div class="a">本页是一个独立介绍页，主要展示用途与入口，主站内容请通过下方链接访问：<a href="https://m-sports-kiwi.com">奇异果体育</a>。</div>
+        </div>
+        <div class="faq-item">
+            <span class="q">🔍 链接安全吗？</span>
+            <div class="a">本页所有链接均指向对应站点，使用标准 HTTPS 协议。建议你根据自身网络环境判断。</div>
+        </div>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        ✦ 信息卡片 · 奇异果体育 · 页面说明 ✦
+    </div>
+</div>
+</body>
+</html>
